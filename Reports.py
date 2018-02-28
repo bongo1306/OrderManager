@@ -329,7 +329,7 @@ class ReportsTab(object):
 					CHARINDEX(view_systems.bpcs_item, ecrs.item) > 0
 					)
 				WHERE
-					ecrs.reason = 'Engineering Error' AND
+					ecrs.reason = 'Engineering Error' AND ecrs.Production_Plant = 'Systems' AND
 					((view_systems.date_actual_finish >= '{}' AND view_systems.date_actual_finish <= '{}'))
 			'''.format(start_date, end_date))
 			
