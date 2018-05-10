@@ -143,6 +143,13 @@ class QuoteManagerTab(object):
         self.printer_paper_orientation = wx.LANDSCAPE       #wx.LANDSCAPE
         self.margins = (15, 15, 15, 15)                     #specify like (0, 0, 0, 0), otherwise None means whatever default is
 
+        #Disbale Date Completed from QuoteManager if not application engineer
+        #print gn.user
+        user_dept = self.dbCursor.execute("Select department from employees where name = \'{}\' ".format(gn.user.replace("'", "''"))).fetchone()
+        #print user_dept[0]
+        if user_dept[0] != "Applications Engineering":
+            self.m_DateCompleted.Disable()
+
 
     def OnPreviousRecord(self, event):
 

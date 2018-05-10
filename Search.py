@@ -308,7 +308,7 @@ class SearchTab(object):
 
     def on_size_criteria_table(self, event):
         table = event.GetEventObject()
-        table.SetColSize(1, table.GetSize()[0] - table.GetColSize(0) - wx.SystemSettings.GetMetric(wx.SYS_VSCROLL_X))
+        #table.SetColSize(1, table.GetSize()[0] - table.GetColSize(0) - wx.SystemSettings.GetMetric(wx.SYS_VSCROLL_X))
 
         event.Skip()
 
