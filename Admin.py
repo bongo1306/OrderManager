@@ -203,7 +203,7 @@ class AdminTab(object):
                                            msgbox = wx.MessageBox('The password expiration date cannot be in past!', 'Alert')
                                  else:
                                          
-                                       if ('@LENNOXINTL.COM' in email.upper()) or ('@HEATCRAFTRPD.COM' in email.upper()):
+                                       if ('@LENNOXINTL.COM' in email.upper()) or ('@HEATCRAFTRPD.COM' in email.upper()) or ('@KYSORWARREN.COM' in email.upper()):
                                                regex=re.match('^[_a-zA-Z0-9-]+(\.[_a-zA-Z0-9-]+)*@[a-zA-Z0-9-]+(\.[a-zA-Z]{2,3})$',email.upper())
                                                if regex:
                                                         self.dbCursor.execute("""UPDATE employees SET activated=?,name=?,password=?,password_expiration=?,
@@ -224,10 +224,10 @@ class AdminTab(object):
                                                         self.conn.commit() 
                                                         msgbox = wx.MessageBox('Data successfully updated', 'Alert')
                                                else:
-                                                        msgbox = wx.MessageBox('Email should be like example@Lennoxintl.com or example@Heatcraftrpd.com', 'Alert')
+                                                        msgbox = wx.MessageBox('Email should be like example@Lennoxintl.com or example@Heatcraftrpd.com or example@Kysorwarren.com', 'Alert')
                                                         
                                        else:
-                                               msgbox = wx.MessageBox('Email should be like example@Lennoxintl.com or example@Heatcraftrpd.com', 'Alert')
+                                               msgbox = wx.MessageBox('Email should be like example@Lennoxintl.com or example@Heatcraftrpd.com or example@Kysorwarren.com', 'Alert')
 
 
            else:
@@ -235,7 +235,7 @@ class AdminTab(object):
                                            msgbox = wx.MessageBox('The password expiration date cannot be in past!', 'Alert')
                                     
                    else:
-                           if ('@LENNOXINTL.COM' in email.upper()) or ('HEATCRAFTRPD.COM' in email.upper()):                                   
+                           if ('@LENNOXINTL.COM' in email.upper()) or ('HEATCRAFTRPD.COM' in email.upper()) or ('KYSORWARREN.COM' in email.upper()):
                                    regex=re.match('^[_a-zA-Z0-9-]+(\.[_a-zA-Z0-9-]+)*@[a-zA-Z0-9-]+(\.[a-zA-Z]{2,3})$',email.upper())
                                    if regex:
                                            
@@ -253,9 +253,9 @@ class AdminTab(object):
                                                self.conn.commit()
                                                msgbox = wx.MessageBox('Data successfully inserted', 'Alert')
                                    else:
-                                        msgbox = wx.MessageBox('Email should be like example@Lennoxintl.com or example@Heatcraftrpd.com', 'Alert')       
+                                        msgbox = wx.MessageBox('Email should be like example@Lennoxintl.com or example@Heatcraftrpd.com or example@Kysorwarren.com', 'Alert')
                            else:
-                                   msgbox = wx.MessageBox('Email should be like example@Lennoxintl.com or example@Heatcraftrpd.com', 'Alert')
+                                   msgbox = wx.MessageBox('Email should be like example@Lennoxintl.com or example@Heatcraftrpd.com or example@Kysorwarren.com', 'Alert')
 
                         
         #method for export the excel of employee details                     

@@ -511,8 +511,6 @@ class QuoteManagerTab(object):
 
         self.m_ComboSP.SetItems(self.SPNames)
 
-
-
     def FillCustomerComboBox(self):
 
         del self.CustomerData[:]

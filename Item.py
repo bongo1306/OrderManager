@@ -158,8 +158,8 @@ class ItemFrame(wx.Frame):
     # @MM
     def OrderCompleteNotice(self, event):
 
-        db.query("INSERT INTO orders.changes (table_name, table_id, field, previous_value, new_value, who_changed, when_changed) values (\'{}\', \'{}\',\'{}\',\'{}\',\'{}\',\'{}\',\'{}\')".format('N/A',self.id,'Clicked Sent Notice Button','N/A','N/A',gn.user,'CURRENT_TIMESTAMP'))
-        print "Track enabled"
+        db.edit("INSERT INTO orders.changes (table_name, table_id, field, previous_value, new_value, who_changed, when_changed) values (\'{}\', \'{}\',\'{}\',\'{}\',\'{}\',\'{}\',{})".format('N/A',self.id,'Clicked Sent Notice Button','N/A','N/A',gn.user,'CURRENT_TIMESTAMP'))
+        #print "Track enabled"
 
         sender = db.query('SELECT TOP 1 email FROM employees WHERE name = \'{}\''.format(gn.user))
         sender_email = sender[0]
