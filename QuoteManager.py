@@ -1174,22 +1174,6 @@ class QuoteManagerTab(object):
             wx.MessageBox("Please select a valid Date Due", "Save Unsuccessful",wx.OK | wx.ICON_EXCLAMATION)
             return
 
-        # get date job completed ~~~~~~~~~~~~~~~~~~~~~~~~~~
-        wx_Comp = self.m_DateCompleted.GetValue()
-        PyComplete = gn.wxdate2pydate(wx_Comp)                        #Date completed in python format
-
-        if wx_Comp.IsValid() == True and wx_Rec.IsLaterThan(wx_Comp) == True:
-            wx.MessageBox("Date Completed cannot be less than Date Received", "Save Unsuccessful",wx.OK | wx.ICON_EXCLAMATION)
-            return
-        elif wx_Comp.IsValid() == True:
-            DateComp = wx_Comp.FormatISODate()
-            TADays = str(workdays.networkdays(PyReceived, PyComplete)-1)
-            self.m_TextTurnAround.SetLabel(TADays)
-        else:
-            DateComp = "1/1/9999"  #Invalid Date
-            self.m_TextTurnAround.SetLabel("TBD")
-
-
         # get the name of the appl engineer selected in the combo box ~~~~~~~~~~~
         Assigned = str(self.m_ComboAssigned.GetValue())
         if len(Assigned) <= 1:
@@ -1305,6 +1289,28 @@ class QuoteManagerTab(object):
             RecordCreatorName = str(gn.user)
             RecordCreationDate = str(wx.DateTime_Today().FormatISODate())
             RecordCreationTime = str(wx.DateTime_Now().FormatISOTime())
+
+        # get date job completed ~~~~~~~~~~~~~~~~~~~~~~~~~~
+        User_dept = self.dbCursor.execute("Select department from employees where name = \'{}\' ".format(gn.user.replace("'", "''"))).fetchone()
+        # print user_dept[0]
+        if User_dept[0] != "Applications Engineering" and RecordKeyExists == False:
+            self.m_DateCompleted.SetValue(wx.DateTime_Today())
+            self.m_DateCompleted.SetValue(wx.DefaultDateTime)
+
+        wx_Comp = self.m_DateCompleted.GetValue()
+        #print wx_Comp
+        PyComplete = gn.wxdate2pydate(wx_Comp)  # Date completed in python format
+
+        if wx_Comp.IsValid() == True and wx_Rec.IsLaterThan(wx_Comp) == True:
+            wx.MessageBox("Date Completed cannot be less than Date Received", "Save Unsuccessful",wx.OK | wx.ICON_EXCLAMATION)
+            return
+        elif wx_Comp.IsValid() == True:
+            DateComp = wx_Comp.FormatISODate()
+            TADays = str(workdays.networkdays(PyReceived, PyComplete) - 1)
+            self.m_TextTurnAround.SetLabel(TADays)
+        else:
+            DateComp = "1/1/9999"  # Invalid Date
+            self.m_TextTurnAround.SetLabel("TBD")
 
         sqlorder = "SELECT * FROM dbo.QuoteMaker WHERE QuoteNumber = '" + QuoteNumber + "'and projecttype = 'Order'"
         self.dbCursor.execute(sqlorder)
