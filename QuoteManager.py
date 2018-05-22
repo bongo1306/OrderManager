@@ -69,6 +69,17 @@ class QuoteManagerTab(object):
         self.Bind(wx.EVT_CHECKBOX, self.OnCheckRefrigerant, id=xrc.XRCID('m_CheckAmmonia'))
         self.Bind(wx.EVT_CHECKBOX, self.OnCheckRefrigerant, id=xrc.XRCID('m_CheckGlycol'))
 
+        #Bind Do_Nothing Event upon mousewheel scroll in order to not change users Dropdowns selection accidently
+        ctrl(self, 'm_ComboProjectType').Bind(wx.EVT_MOUSEWHEEL, self.do_nothing1)
+        ctrl(self, 'm_ComboBidOpen').Bind(wx.EVT_MOUSEWHEEL, self.do_nothing1)
+        ctrl(self, 'm_ComboProjectStatus').Bind(wx.EVT_MOUSEWHEEL, self.do_nothing1)
+        ctrl(self, 'm_ComboZone').Bind(wx.EVT_MOUSEWHEEL, self.do_nothing1)
+        ctrl(self, 'm_ComboRevLevel').Bind(wx.EVT_MOUSEWHEEL, self.do_nothing1)
+        ctrl(self, 'm_ComboAssigned').Bind(wx.EVT_MOUSEWHEEL, self.do_nothing1)
+        ctrl(self, 'm_ComboSP').Bind(wx.EVT_MOUSEWHEEL, self.do_nothing1)
+        ctrl(self, 'm_ComboQuoteForm').Bind(wx.EVT_MOUSEWHEEL, self.do_nothing1)
+        ctrl(self, 'm_ComboCustomerName').Bind(wx.EVT_MOUSEWHEEL, self.do_nothing1)
+        ctrl(self, 'm_ComboCMAT').Bind(wx.EVT_MOUSEWHEEL, self.do_nothing1)
 
         #self.m_checkListBox = wx.FindWindowByName('m_checkListBox')
         self.m_ComboProjectType = wx.FindWindowByName('m_ComboProjectType')
@@ -149,6 +160,9 @@ class QuoteManagerTab(object):
         #print user_dept[0]
         if user_dept[0] != "Applications Engineering":
             self.m_DateCompleted.Disable()
+
+    def do_nothing1(self, evt):
+        print 'on events pit'
 
 
     def OnPreviousRecord(self, event):

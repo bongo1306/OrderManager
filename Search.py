@@ -64,7 +64,13 @@ class SearchTab(object):
 
         ctrl(self, 'choice:which_table').AppendItems(tables)
         ctrl(self, 'choice:which_table').SetStringSelection('orders.view_systems_abridged')
+        #Bind Do_Nothing Event upon mousewheel scroll in order to not change users Dropdowns selection accidently
+        ctrl(self, 'choice:which_table').Bind(wx.EVT_MOUSEWHEEL, self.do_nothing)
+
         self.on_choice_table()
+
+    def do_nothing(self,evt):
+        print 'on events pit'
 
 
 

@@ -76,6 +76,16 @@ class QuoteSearchDialog(wx.Dialog):
                 self.m_ComboSearchRev.SetStringSelection('ALL')
                 self.m_ComboSearchProjectType.SetStringSelection('ALL')
 
+                # Bind Do_Nothing Event upon mousewheel scroll in order to not change users Dropdowns selection accidently
+                ctrl(self, 'm_ComboSearchProjectType').Bind(wx.EVT_MOUSEWHEEL, self.do_nothing2)
+                ctrl(self, 'm_ComboSearchRev').Bind(wx.EVT_MOUSEWHEEL, self.do_nothing2)
+                ctrl(self, 'm_ComboSearchAE').Bind(wx.EVT_MOUSEWHEEL, self.do_nothing2)
+                ctrl(self, 'm_ComboSearchSP').Bind(wx.EVT_MOUSEWHEEL, self.do_nothing2)
+                ctrl(self, 'm_ComboBid').Bind(wx.EVT_MOUSEWHEEL, self.do_nothing2)
+                ctrl(self, 'm_ComboQuoteFormReceived').Bind(wx.EVT_MOUSEWHEEL, self.do_nothing2)
+                ctrl(self, 'm_ComboSearchCMAT').Bind(wx.EVT_MOUSEWHEEL, self.do_nothing2)
+
+
                 wxDate = wx.DateTime()
                 wxDate.ParseDate("01/01/2000")
                 self.m_DateReceivedStart.SetValue(wxDate)
@@ -108,6 +118,9 @@ class QuoteSearchDialog(wx.Dialog):
 
                 #misc
                 self.SetTitle('Quote Search')
+
+        def do_nothing2(self, evt):
+            print 'on events pit'
 
         def PopulateAE(self, AEList):
 

@@ -65,6 +65,10 @@ class AdminTab(object):
                 self.m_TextCtrlHoliList = wx.FindWindowByName('m_TextCtrlHoliList')
                 self.m_ButtonRemoveHoliday = wx.FindWindowByName('m_ButtonRemoveHoliday')
                 self.m_DateRemoveHoliday = wx.FindWindowByName('m_DateRemoveHoliday')
+
+                # Bind Do_Nothing Event upon mousewheel scroll in order to not change users Dropdowns selection accidently
+                ctrl(self, 'm_combodepartment').Bind(wx.EVT_MOUSEWHEEL, self.do_nothing3)
+
                 self.fetchDB()
                 adminuser=[]
                 selected_user=self.name.GetStringSelection()
@@ -143,7 +147,10 @@ class AdminTab(object):
                         
                         #Database connection variables
                         self.AENames = []
-                        #self.dbCursor = None               
+                        #self.dbCursor = None
+
+        def do_nothing3(self, evt):
+            print 'on events pit'
                         
         def fetchDB(self):
 
